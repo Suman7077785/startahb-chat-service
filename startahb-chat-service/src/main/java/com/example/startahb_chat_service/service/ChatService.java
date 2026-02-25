@@ -27,10 +27,8 @@ public class ChatService {
     private final SimpMessagingTemplate messagingTemplate;
     private final ChatMapper mapper;
 
-
-    // ==============================
     // SEND MESSAGE
-    // ==============================
+
     public ChatMessageResponseDTO sendMessage(SendMessageDTO dto) {
 
         ChatRoom chatRoom = findOrCreateChatRoom(dto.getSenderId(), dto.getReceiverId());
@@ -93,8 +91,6 @@ public class ChatService {
                 mapper.toDTO(message)
         );
     }
-
-    // GET MESSAGES BY CHAT ROOM
 
     public List<ChatMessageResponseDTO> getMessages(Long chatRoomId) {
 

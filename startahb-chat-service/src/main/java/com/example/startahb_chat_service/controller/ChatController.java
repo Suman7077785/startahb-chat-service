@@ -2,7 +2,6 @@ package com.example.startahb_chat_service.controller;
 
 import com.example.startahb_chat_service.dto.ChatMessageResponseDTO;
 import com.example.startahb_chat_service.dto.SendMessageDTO;
-import com.example.startahb_chat_service.entity.ChatMessage;
 import com.example.startahb_chat_service.service.ChatService;
 import com.example.startahb_chat_service.service.OnlineUserService;
 import lombok.RequiredArgsConstructor;
