@@ -11,7 +11,6 @@ import com.example.startahb_chat_service.exception.ResourceNotFoundException;
 import com.example.startahb_chat_service.mapper.ChatMapper;
 import com.example.startahb_chat_service.repository.ChatMessageRepository;
 import com.example.startahb_chat_service.repository.ChatRoomRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class ChatService {
 
     private final ChatRoomRepository chatRoomRepository;
@@ -27,10 +25,18 @@ public class ChatService {
     private final SimpMessagingTemplate messagingTemplate;
     private final ChatMapper mapper;
 
+    public ChatService(ChatRoomRepository chatRoomRepository,
+                       ChatMessageRepository chatMessageRepository,
+                       SimpMessagingTemplate messagingTemplate,
+                       ChatMapper mapper) {
+        this.chatRoomRepository = chatRoomRepository;
+        this.chatMessageRepository = chatMessageRepository;
+        this.messagingTemplate = messagingTemplate;
+        this.mapper = mapper;
+    }
 
-    // ==============================
     // SEND MESSAGE
-    // ==============================
+
     public ChatMessageResponseDTO sendMessage(SendMessageDTO dto) {
 
         ChatRoom chatRoom = findOrCreateChatRoom(dto.getSenderId(), dto.getReceiverId());
@@ -94,8 +100,6 @@ public class ChatService {
         );
     }
 
-    // GET MESSAGES BY CHAT ROOM
-
     public List<ChatMessageResponseDTO> getMessages(Long chatRoomId) {
 
         List<ChatMessage> messages =
@@ -125,3 +129,4 @@ public class ChatService {
                 );
     }
 }
+
